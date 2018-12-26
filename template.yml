@@ -18,3 +18,4 @@ Resources:
       Environment:
         Variables:
           UBER_API_KEY:
+          LYFT_API_KEY:
