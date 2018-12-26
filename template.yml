@@ -15,3 +15,6 @@ Resources:
           Properties:
             Path: /
             Method: get
+      Environment:
+        Variables:
+          UBER_API_KEY:
