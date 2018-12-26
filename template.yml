@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Description: A rideshare price tracking service for Uber and Lyft
+
+Resources:
+  compare:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: bin/lambda
+      Runtime: go1.x
+      Events:
+        compare:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
