@@ -1,3 +1,7 @@
+# sensitive information
+*.env
+environment.json
+
 # golang output binary directory
 bin
 main
