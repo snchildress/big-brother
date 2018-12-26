@@ -16,13 +16,13 @@ deploy: clean build
 		--profile personal
 	sam package \
 		--template-file template.yml \
-		--output-template-file serverless-output.yml \
+		--output-template-file deployment.yml \
 		--s3-bucket big-brother-prod \
 		--region us-east-1 \
 		--profile personal
 	sam deploy \
 		--template-file \
-		serverless-output.yml \
+		deployment.yml \
 		--stack-name big-brother \
 		--capabilities CAPABILITY_IAM \
 		--region us-east-1 \

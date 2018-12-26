@@ -2,6 +2,9 @@
 bin
 main
 
+# aws SAM serverless deployment config
+deployment.yml
+
 # golang vendor (dependencies) directory
 vendor
 
