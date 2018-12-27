@@ -5,6 +5,7 @@ import "os"
 // API keys
 var uberAPIKey = os.Getenv("UBER_API_KEY")
 var lyftAPIKey = os.Getenv("LYFT_API_KEY")
+var slackAPIKey = os.Getenv("SLACK_API_KEY")
 
 // API Endpoint
 var uberEndpoint = "https://api.uber.com/v1.2/estimates/price"
