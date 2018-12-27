@@ -8,7 +8,7 @@ clean:
 	rm -rf ./bin ./vendor Gopkg.lock
 
 offline: clean build
-	sam local start-api --env-vars environment.json
+	sam local start-api --env-vars local-environment.json
 
 deploy: clean build
 	aws s3 mb s3://big-brother-prod \
@@ -21,9 +21,8 @@ deploy: clean build
 		--region us-east-1 \
 		--profile personal
 	sam deploy \
-		--template-file \
-		deployment.yml \
 		--stack-name big-brother \
+		--template-file deployment.yml \
 		--capabilities CAPABILITY_IAM \
 		--region us-east-1 \
 		--profile personal
