@@ -12,16 +12,14 @@ import (
 	"github.com/jmoiron/jsonq"
 )
 
-// Response is a JSON response object
-type Response struct {
-	Message string `json:"message"`
-}
-
 // Handler is the main AWS Lambda handler func
-func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func Handler(request events.APIGatewayProxyRequest) (response events.APIGatewayProxyResponse, err error) {
 	// GET the Lyft estimated cost
 	client := &http.Client{}
-	req, _ := http.NewRequest("GET", lyftEndpoint, nil)
+	req, err := http.NewRequest("GET", lyftEndpoint, nil)
+	if err != nil {
+		return
+	}
 	queryString := req.URL.Query()
 	queryString.Add("start_lat", startLat)
 	queryString.Add("start_lng", startLong)
@@ -29,7 +27,10 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	queryString.Add("end_lng", endLong)
 	req.URL.RawQuery = queryString.Encode()
 	req.Header.Set("Authorization", "bearer "+lyftAPIKey)
-	res, _ := client.Do(req)
+	res, err := client.Do(req)
+	if err != nil {
+		return
+	}
 	resBodyBytes, _ := ioutil.ReadAll(res.Body)
 	resBody := string(resBodyBytes)
 	data := map[string]interface{}{}
@@ -43,10 +44,11 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	lyftMaxPrice := fmt.Sprintf("%.0f", lyftMaxPriceFloat)
 	lyftEstimateMessage := "Lyft Estimate: $" + lyftMinPrice + "-" + lyftMaxPrice
 
-	return events.APIGatewayProxyResponse{
+	response = events.APIGatewayProxyResponse{
 		Body:       lyftEstimateMessage,
 		StatusCode: 200,
-	}, nil
+	}
+	return
 }
 
 func main() {
