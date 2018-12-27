@@ -3,7 +3,9 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
+	"math/rand"
 	"os"
+	"time"
 )
 
 type addresses struct {
@@ -28,5 +30,18 @@ func getAddresses() (addresses addresses, err error) {
 
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 	json.Unmarshal([]byte(byteValue), &addresses)
+	return
+}
+
+// getAddress gets a random address
+func getAddress() (address address, err error) {
+	addresses, err := getAddresses()
+	if err != nil {
+		return
+	}
+	addressesArray := addresses.Address
+	rand.Seed(time.Now().Unix())                // resets randomization on each function call
+	randomInt := rand.Intn(len(addressesArray)) // get random item in addresses array
+	address = addressesArray[randomInt]
 	return
 }
