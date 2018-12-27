@@ -14,12 +14,21 @@
   revision = "9e3676ee8ca83aee500682f382e10b9d03660093"
   version = "v1.8.0"
 
+[[projects]]
+  branch = "master"
+  digest = "1:438016f7d4af8e5a7010b6d0705b267a7607ddc0decad051e83a9458c6b9a523"
+  name = "github.com/jmoiron/jsonq"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e874b168d07ecc7808bc950a17998a8aa3141d82"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
     "github.com/aws/aws-lambda-go/events",
     "github.com/aws/aws-lambda-go/lambda",
+    "github.com/jmoiron/jsonq",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
