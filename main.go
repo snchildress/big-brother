@@ -13,7 +13,7 @@ import (
 )
 
 // Handler is the main AWS Lambda handler func
-func Handler(request events.APIGatewayProxyRequest) (response events.APIGatewayProxyResponse, err error) {
+func Handler() (response events.APIGatewayProxyResponse, err error) {
 	// GET the Lyft estimated cost
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", lyftEndpoint, nil)
