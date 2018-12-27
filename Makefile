@@ -8,7 +8,7 @@ clean:
 	rm -rf ./bin ./vendor Gopkg.lock
 
 offline: clean build
-	sam local start-api --env-vars local-environment.json
+	sam local start-api --env-vars local.env.json
 
 deploy: clean build
 	aws s3 mb s3://big-brother-prod \
