@@ -28,14 +28,15 @@ func Handler() (response events.APIGatewayProxyResponse, err error) {
 	}
 
 	// Post the estimates to Slack
-	err = postMessage(uberEstimate)
+	message := "Current estimated New Orleans rideshare prices:\n\n" + lyftEstimate + "\n" + uberEstimate
+	err = postMessage(message)
 	if err != nil {
 		return
 	}
 
 	// Return the Lyft estimate
 	response = events.APIGatewayProxyResponse{
-		Body:       lyftEstimate,
+		Body:       message,
 		StatusCode: 200,
 	}
 	return
@@ -96,10 +97,10 @@ func getEstimate(lyft bool) (estimate string, err error) {
 		lyftMaxPriceFloat := lyftEstimate["estimated_cost_cents_max"].(float64) / 100
 		lyftMinPrice := fmt.Sprintf("%.0f", lyftMinPriceFloat)
 		lyftMaxPrice := fmt.Sprintf("%.0f", lyftMaxPriceFloat)
-		estimate = "Lyft Estimate: $" + lyftMinPrice + "-" + lyftMaxPrice
+		estimate = "Lyft: $" + lyftMinPrice + "-" + lyftMaxPrice
 	} else {
 		uberEstimate, _ := resBody.String("prices", "0", "estimate")
-		estimate = "Uber Estimate: " + uberEstimate
+		estimate = "Uber: " + uberEstimate
 	}
 	return
 }
