@@ -52,7 +52,7 @@ func getEstimate(lyft bool) (estimate string, err error) {
 		queryString.Add("end_lng", endLong)
 	} else {
 		req.Header.Set("Authorization", "Token "+uberAPIKey)
-		queryString.Add("start_latititude", startLat)
+		queryString.Add("start_latitude", startLat)
 		queryString.Add("start_longitude", startLong)
 		queryString.Add("end_latitude", endLat)
 		queryString.Add("end_longitude", endLong)
