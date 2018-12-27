@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -27,14 +26,8 @@ func Handler() (response events.APIGatewayProxyResponse, err error) {
 		return
 	}
 
-	// Post the estimates to Slack
+	// Return the estimated prices in the response body
 	message := "Current estimated New Orleans rideshare prices:\n\n" + lyftEstimate + "\n" + uberEstimate
-	err = postMessage(message)
-	if err != nil {
-		return
-	}
-
-	// Return the Lyft estimate
 	response = events.APIGatewayProxyResponse{
 		Body:       message,
 		StatusCode: 200,
@@ -102,27 +95,6 @@ func getEstimate(lyft bool) (estimate string, err error) {
 		uberEstimate, _ := resBody.String("prices", "0", "estimate")
 		estimate = "Uber: " + uberEstimate
 	}
-	return
-}
-
-// postMessage posts the given message to Slack
-func postMessage(message string) (err error) {
-	// Create an HTTP client for the Slack API request
-	client := &http.Client{}
-	var reqBody = []byte(`{"channel": "` + slackChannel + `", "text": "` + message + `"}`)
-	req, err := http.NewRequest("POST", slackEndpoint, bytes.NewBuffer(reqBody))
-	if err != nil {
-		return
-	}
-
-	// Set the headers and make the API request
-	req.Header.Set("Authorization", "Bearer "+slackAPIKey)
-	req.Header.Set("Content-Type", "application/json")
-	res, err := client.Do(req)
-	if err != nil {
-		return
-	}
-	defer res.Body.Close()
 	return
 }
 

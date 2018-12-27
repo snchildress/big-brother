@@ -5,15 +5,10 @@ import "os"
 // API keys
 var uberAPIKey = os.Getenv("UBER_API_KEY")
 var lyftAPIKey = os.Getenv("LYFT_API_KEY")
-var slackAPIKey = os.Getenv("SLACK_API_KEY")
 
 // API Endpoints
 var uberEndpoint = "https://api.uber.com/v1.2/estimates/price"
 var lyftEndpoint = "https://api.lyft.com/v1/cost"
-var slackEndpoint = "https://slack.com/api/chat.postMessage"
-
-// Slack channel ID
-var slackChannel = os.Getenv("SLACK_CHANNEL")
 
 // Trip origin and destination coordinates
 
