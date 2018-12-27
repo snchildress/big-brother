@@ -27,8 +27,11 @@ func Handler() (response events.APIGatewayProxyResponse, err error) {
 	}
 
 	// Return the estimated prices in the response body
+	headers := make(map[string]string)
+	headers["Content-Type"] = "text/plain"
 	message := "Current estimated New Orleans rideshare prices:\n\n" + lyftEstimate + "\n" + uberEstimate
 	response = events.APIGatewayProxyResponse{
+		Headers:    headers,
 		Body:       message,
 		StatusCode: 200,
 	}
