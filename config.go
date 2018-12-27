@@ -12,6 +12,9 @@ var uberEndpoint = "https://api.uber.com/v1.2/estimates/price"
 var lyftEndpoint = "https://api.lyft.com/v1/cost"
 var slackEndpoint = "https://slack.com/api/chat.postMessage"
 
+// Slack channel ID
+var slackChannel = os.Getenv("SLACK_CHANNEL")
+
 // Trip origin and destination coordinates
 
 // 365 Canal St, New Orleans, LA 70130

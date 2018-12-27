@@ -21,3 +21,4 @@ Resources:
           UBER_API_KEY:
           LYFT_API_KEY:
           SLACK_API_KEY:
+          SLACK_CHANNEL:
