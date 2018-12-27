@@ -15,14 +15,24 @@ import (
 // Handler is the main AWS Lambda handler func
 func Handler() (response events.APIGatewayProxyResponse, err error) {
 	// Get the Lyft estimate
-	estimate, err := getEstimate(true)
+	lyftEstimate, err := getEstimate(true)
 	if err != nil {
 		return
 	}
 
+	// Get the Uber estimate
+	uberEstimate, err := getEstimate(false)
+	if err != nil {
+		return
+	}
+
+	// Print out the two services' estimates
+	fmt.Println(lyftEstimate)
+	fmt.Println(uberEstimate)
+
 	// Return the Lyft estimate
 	response = events.APIGatewayProxyResponse{
-		Body:       estimate,
+		Body:       lyftEstimate,
 		StatusCode: 200,
 	}
 	return
@@ -83,6 +93,9 @@ func getEstimate(lyft bool) (estimate string, err error) {
 		lyftMinPrice := fmt.Sprintf("%.0f", lyftMinPriceFloat)
 		lyftMaxPrice := fmt.Sprintf("%.0f", lyftMaxPriceFloat)
 		estimate = "Lyft Estimate: $" + lyftMinPrice + "-" + lyftMaxPrice
+	} else {
+		uberEstimate, _ := resBody.String("prices", "0", "estimate")
+		estimate = "Uber Estimate: " + uberEstimate
 	}
 	return
 }
