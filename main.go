@@ -74,6 +74,7 @@ func getEstimate(lyft bool) (estimate string, err error) {
 	if err != nil {
 		return
 	}
+	defer res.Body.Close()
 
 	// Get the response body
 	resBodyBytes, err := ioutil.ReadAll(res.Body)
