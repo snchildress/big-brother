@@ -6,7 +6,7 @@ Big Brother is a rideshare price tracking service and is exposed as an HTTP endp
 
 1. Local development and deployments are managed by AWS SAM. Install it using `pip install --user --upgrade aws-sam-cli`
 2. AWS SAM uses Docker containers locally. Install Docker by visiting their [site](https://docs.docker.com/docker-for-mac/install/)
-3. Configure your environment variables in a `local-environment.json` file
+3. Configure your environment variables in a `local.env.json` file (see `example.env.json` for format)
 4. Run the application locally with `make offline`
 
 ## Deployment
