@@ -1,6 +1,6 @@
 # Big Brother
 
-Big Brother is a rideshare price tracking service and is exposed as an HTTP endpoint hosted on AWS Lambda
+Big Brother is a rideshare price tracking service and is exposed as an HTTP endpoint hosted on AWS Lambda and consumed as a Slack slash command
 
 ## Getting Started
 
@@ -22,6 +22,13 @@ Big Brother is a rideshare price tracking service and is exposed as an HTTP endp
 2. Deploy with `make deploy`
 
 To tear down your production environment, run `make remove`
+
+## Slack Integration
+
+1. Grab your HTTP endpoint by visiting the AWS Lambda or AWS Gateway consoles
+2. Create a new Slack app and navigate to the `Slash Commands` section where you'll create a new slash command using your new HTTP endpoint
+
+You'll begin receiving responses in Slack using the `/command` that you defined
 
 ## Contributing
 
