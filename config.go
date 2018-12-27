@@ -6,6 +6,9 @@ import "os"
 var uberAPIKey = os.Getenv("UBER_API_KEY")
 var lyftAPIKey = os.Getenv("LYFT_API_KEY")
 
+// API Endpoint
+var lyftEndpoint = "https://api.lyft.com/v1/cost"
+
 // Trip origin and destination coordinates
 
 // 365 Canal St, New Orleans, LA 70130
