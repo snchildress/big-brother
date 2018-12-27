@@ -7,6 +7,7 @@ var uberAPIKey = os.Getenv("UBER_API_KEY")
 var lyftAPIKey = os.Getenv("LYFT_API_KEY")
 
 // API Endpoint
+var uberEndpoint = "https://api.uber.com/v1.2/estimates/price"
 var lyftEndpoint = "https://api.lyft.com/v1/cost"
 
 // Trip origin and destination coordinates
