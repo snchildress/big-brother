@@ -14,14 +14,27 @@ import (
 
 // Handler is the main AWS Lambda handler func
 func Handler() (response events.APIGatewayProxyResponse, err error) {
+	// get random addresses for origin and destination
+	startAddress, err := getAddress()
+	if err != nil {
+		return
+	}
+	endAddress, err := getAddress()
+	if err != nil {
+		return
+	}
+
+	originAddress := fmt.Sprintf("%v", startAddress.Address) + " " + startAddress.Street
+	destinationAddress := fmt.Sprintf("%v", endAddress.Address) + " " + endAddress.Street
+
 	// Get the Lyft estimate
-	lyftEstimate, err := getEstimate(true)
+	lyftEstimate, err := getEstimate(true, startAddress, endAddress)
 	if err != nil {
 		return
 	}
 
 	// Get the Uber estimate
-	uberEstimate, err := getEstimate(false)
+	uberEstimate, err := getEstimate(false, startAddress, endAddress)
 	if err != nil {
 		return
 	}
@@ -29,7 +42,9 @@ func Handler() (response events.APIGatewayProxyResponse, err error) {
 	// Return the estimated prices in the response body
 	headers := make(map[string]string)
 	headers["Content-Type"] = "text/plain"
-	message := "Current estimated New Orleans rideshare prices:\n\n" + lyftEstimate + "\n" + uberEstimate
+	message := "Current estimated New Orleans rideshare prices:" +
+		"\n\nOrigin Address: " + originAddress + "\nDestination Address: " +
+		destinationAddress + "\n\n" + lyftEstimate + "\n" + uberEstimate
 	response = events.APIGatewayProxyResponse{
 		Headers:    headers,
 		Body:       message,
@@ -40,7 +55,7 @@ func Handler() (response events.APIGatewayProxyResponse, err error) {
 
 // getEstimate requests an estimated price for the configured
 // coordinates for the given service, Lyft or Uber
-func getEstimate(lyft bool) (estimate string, err error) {
+func getEstimate(lyft bool, startAddress address, endAddress address) (estimate string, err error) {
 	// Create an HTTP client for the given service's endpoint and key
 	client := &http.Client{}
 	endpoint := uberEndpoint
@@ -56,16 +71,16 @@ func getEstimate(lyft bool) (estimate string, err error) {
 	queryString := req.URL.Query()
 	if lyft {
 		req.Header.Set("Authorization", "bearer "+lyftAPIKey)
-		queryString.Add("start_lat", startLat)
-		queryString.Add("start_lng", startLong)
-		queryString.Add("end_lat", endLat)
-		queryString.Add("end_lng", endLong)
+		queryString.Add("start_lat", fmt.Sprintf("%f", startAddress.Latitude))
+		queryString.Add("start_lng", fmt.Sprintf("%f", startAddress.Longitude))
+		queryString.Add("end_lat", fmt.Sprintf("%f", endAddress.Latitude))
+		queryString.Add("end_lng", fmt.Sprintf("%f", endAddress.Longitude))
 	} else {
 		req.Header.Set("Authorization", "Token "+uberAPIKey)
-		queryString.Add("start_latitude", startLat)
-		queryString.Add("start_longitude", startLong)
-		queryString.Add("end_latitude", endLat)
-		queryString.Add("end_longitude", endLong)
+		queryString.Add("start_latitude", fmt.Sprintf("%f", startAddress.Latitude))
+		queryString.Add("start_longitude", fmt.Sprintf("%f", startAddress.Longitude))
+		queryString.Add("end_latitude", fmt.Sprintf("%f", endAddress.Latitude))
+		queryString.Add("end_longitude", fmt.Sprintf("%f", endAddress.Longitude))
 	}
 	req.URL.RawQuery = queryString.Encode()
 
