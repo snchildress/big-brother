@@ -14,16 +14,16 @@ import (
 
 // Handler is the main AWS Lambda handler func
 func Handler() (response events.APIGatewayProxyResponse, err error) {
-	// get random addresses for origin and destination
+	// Get random addresses for origin and destination
 	addresses, err := getAddresses()
 	if err != nil {
 		return
 	}
-	startAddress, err := getAddress(addresses)
+	startAddress, addresses, err := getAddress(addresses)
 	if err != nil {
 		return
 	}
-	endAddress, err := getAddress(addresses)
+	endAddress, addresses, err := getAddress(addresses)
 	if err != nil {
 		return
 	}
