@@ -8,10 +8,6 @@ import (
 	"time"
 )
 
-type addresses struct {
-	Address []address `json:"addresses"`
-}
-
 type address struct {
 	Latitude  float64 `json:"latitude"`
 	Longitude float64 `json:"longitude"`
@@ -21,7 +17,7 @@ type address struct {
 
 // getAddresses converts the addresses.json blob to an
 // instance of the addresses struct
-func getAddresses() (addresses addresses, err error) {
+func getAddresses() (addresses []address, err error) {
 	jsonFile, err := os.Open("addresses.json")
 	if err != nil {
 		return
@@ -34,10 +30,9 @@ func getAddresses() (addresses addresses, err error) {
 }
 
 // getAddress gets a random address
-func getAddress(addresses addresses) (address address, err error) {
-	addressesArray := addresses.Address
-	rand.Seed(time.Now().Unix())                // resets randomization on each function call
-	randomInt := rand.Intn(len(addressesArray)) // get random item in addresses array
-	address = addressesArray[randomInt]
+func getAddress(addresses []address) (address address, err error) {
+	rand.Seed(time.Now().Unix())           // resets randomization on each function call
+	randomInt := rand.Intn(len(addresses)) // get random item in addresses array
+	address = addresses[randomInt]
 	return
 }
