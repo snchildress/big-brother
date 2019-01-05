@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Lucid",
+    "address": 365,
+    "street": "Canal St",
+    "neighborhood": "CBD",
+    "latitude": 29.951306,
+    "longitude": -90.0676675
+  },
+  {
+    "name": "Lyft Hub",
+    "address": 2020,
+    "street": "Oretha Castle Haley Blvd",
+    "neighborhood": "Central City",
+    "latitude": 29.9377486,
+    "longitude": -90.083977
+  },
+  {
+    "name": "Finn McCool's Irish Pub",
+    "address": 3701,
+    "street": "Banks St",
+    "neighborhood": "Mid-City",
+    "latitude": 29.969436,
+    "longitude": -90.1013147
+  },
+  {
+    "name": "Audubon Zoo",
+    "address": 6500,
+    "street": "Magazine St",
+    "neighborhood": "Riverbend",
+    "latitude": 29.9259354,
+    "longitude": -90.1306112
+  },
+  {
+    "name": "New Orleans Museum of Art",
+    "address": 1,
+    "street": "Collins Diboll Cir",
+    "neighborhood": "City Park",
+    "latitude": 29.9864799,
+    "longitude": -90.0956276
+  },
+  {
+    "name": "Bacchanal",
+    "address": 600,
+    "street": "Poland Ave",
+    "neighborhood": "Bywater",
+    "latitude": 29.959792,
+    "longitude": -90.0354284
+  },
+  {
+    "name": "Cafe du Monde",
+    "address": 800,
+    "street": "Decatur St",
+    "neighborhood": "French Quarter",
+    "latitude": 29.9631629,
+    "longitude": -90.082052
+  },
+  {
+    "name": "Tulane University",
+    "address": 6823,
+    "street": "St. Charles Ave",
+    "neighborhood": "Uptown",
+    "latitude": 29.9364418,
+    "longitude": -90.1215037
+  },
+  {
+    "name": "University of New Orleans",
+    "address": 2000,
+    "street": "Lakeshore Dr",
+    "neighborhood": "Gentilly",
+    "latitude": 30.0091527,
+    "longitude": -90.0606427
+  },
+  {
+    "name": "The Blue Crab",
+    "address": 7900,
+    "street": "Lakeshore Dr",
+    "neighborhood": "Lakeshore",
+    "latitude": 30.0192845,
+    "longitude": -90.11262
+  }
+]
