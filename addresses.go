@@ -9,10 +9,12 @@ import (
 )
 
 type address struct {
-	Latitude  float64 `json:"latitude"`
-	Longitude float64 `json:"longitude"`
-	Address   int     `json:"address"`
-	Street    string  `json:"street"`
+	Name         string  `json:"name"`
+	Address      int     `json:"address"`
+	Street       string  `json:"street"`
+	Neighborhood string  `json:"neighborhood"`
+	Latitude     float64 `json:"latitude"`
+	Longitude    float64 `json:"longitude"`
 }
 
 // getAddresses converts the addresses.json blob to an

@@ -28,8 +28,8 @@ func Handler() (response events.APIGatewayProxyResponse, err error) {
 		return
 	}
 
-	originAddress := fmt.Sprintf("%v", startAddress.Address) + " " + startAddress.Street
-	destinationAddress := fmt.Sprintf("%v", endAddress.Address) + " " + endAddress.Street
+	originAddress := fmt.Sprintf("%v", startAddress.Name) + " (" + startAddress.Neighborhood + ")"
+	destinationAddress := fmt.Sprintf("%v", endAddress.Name) + " (" + endAddress.Neighborhood + ")"
 
 	// Get the Lyft estimate
 	lyftEstimate, err := getEstimate(true, startAddress, endAddress)
@@ -46,7 +46,7 @@ func Handler() (response events.APIGatewayProxyResponse, err error) {
 	// Return the estimated prices in the response body
 	headers := map[string]string{"Content-Type": "text/plain"}
 	message := "Current estimated New Orleans rideshare prices:" +
-		"\n\nOrigin Address: " + originAddress + "\nDestination Address: " +
+		"\n\nOrigin: " + originAddress + "\nDestination: " +
 		destinationAddress + "\n\n" + lyftEstimate + "\n" + uberEstimate
 	response = events.APIGatewayProxyResponse{
 		Headers:    headers,
